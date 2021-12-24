@@ -5,20 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic-Tac-Toe</title>
+    <link href="http://fonts.cdnfonts.com/css/dunkin-lyons" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="grid">
-            <div class="zero square"></div>
-            <div class="one square"></div>
-            <div class="two square"></div>
-            <div class="three square"></div>
-            <div class="four square"></div>
-            <div class="five square"></div>
-            <div class="six square"></div>
-            <div class="seven square"></div>
-            <div class="eight square"></div>
+    <div id="wrapper">
+        <div id="topbar">
+            <div id="dialog"></div>
+        </div>
+
+        <div id="title">Tic-Tac-Toe</div>
+
+        <div id="container">
+            <div id="grid">
+                <div class="zero square"></div>
+                <div class="one square"></div>
+                <div class="two square"></div>
+                <div class="three square"></div>
+                <div class="four square"></div>
+                <div class="five square"></div>
+                <div class="six square"></div>
+                <div class="seven square"></div>
+                <div class="eight square"></div>
+            </div>
+        </div>
+
+        <div id="bottombar">
+            <button id="startgame">Start Game</button>
+            <button id="replay">Replay</button>
         </div>
     </div>
     <script src="index.js"></script>
