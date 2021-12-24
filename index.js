@@ -73,7 +73,7 @@ const gameController = (() => {
                 resetGame()
             } else if (checkForDraw()) {
                 displayController.setDialog(`It's a draw!`)
-                displayController.showRestart();
+                displayController.showReplay();
                 resetGame()
             } else {
                 _currentPlayer = opposingPlayer();
@@ -131,9 +131,10 @@ const displayController = (() => {
         });
     })
 
-    _replay.addEventListener('click', () => {
-        clearBoard();
+    _replay.addEventListener('click', (e) => {
+        clearSquares();
         gameBoard.clearArray();
+        e.target.style.opacity = 0;
         setDialog(`Player ${gameController.getCurrentPlayer().getSymbol()}'s turn.`)
     })
 
@@ -154,7 +155,7 @@ const displayController = (() => {
         _squares[ind].innerHTML = symbol;
     }
 
-    const clearBoard = () => {
+    const clearSquares = () => {
         _squares.forEach(square => {
             square.style.backgroundColor = '';
             square.innerHTML = '';
@@ -174,6 +175,7 @@ const displayController = (() => {
 
     const showReplay = () => {
         _replay.style.display = 'block';
+        _replay.style.opacity = 1;
         _replay.style.visibility = 'visible';
     }
 

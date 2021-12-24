@@ -87,6 +87,7 @@ button:active {
     visibility: hidden;
     animation: fade 0.5s;
     background-color: rgb(228, 102, 102);
+    transition: visibility 0.3s, opacity 0.3s;
 }
 
 #grid {
