@@ -18,4 +18,6 @@ Desktop             |  Mobile
 
 ## Demo
 
+https://user-images.githubusercontent.com/49933688/147323820-10b40e5a-21c6-41b1-8739-87cac808def1.mov
+
 A live preview of the site can be found [here](https://tmprk.github.io/tic-tac-toe/)
