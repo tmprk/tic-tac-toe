@@ -1,6 +1,6 @@
 # Tic Tac To
 
-This is the second project of the Javascript curriculum in Full Stack Javascript.
+A responsive Tic-Tac-Toe game, part of the Javascript curriculum in Full Stack Javascript.
 
 ## Things to note
 
