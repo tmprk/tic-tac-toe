@@ -11,6 +11,10 @@ const Player = (symbol, isCPU) => {
 const gameBoard = (() => {
     const _board = Array(9).fill('');
 
+    const getBoard = () => {
+        return _board;
+    }
+
     const isValid = (ind) => {
         return _board[ind] === '';
     }
@@ -40,6 +44,7 @@ const gameBoard = (() => {
     }
 
     return {
+        getBoard,
         isValid,
         setOnBoard,
         getPositions,
@@ -78,6 +83,7 @@ const gameController = (() => {
             
             if (checkForWin(_currentPlayer)) {
                 displayController.setDialog(`player ${_currentPlayer.getSymbol()} is the winner`);
+                displayController.endgame(winningPositions[i]);
                 resetGame()
             } else if (checkForDraw()) {
                 displayController.setDialog(`It's a draw!`)
@@ -95,12 +101,11 @@ const gameController = (() => {
     const checkForWin = (player) => {
         console.log('checking for a win');
         const playerPositions = gameBoard.getPositions(player.getSymbol())
-        console.log(playerPositions);
+        // console.log(playerPositions);
         
         for (let i = 0; i < winningPositions.length; i++) {
             if (playerPositions.length >= 3) {
                 if (winningPositions[i].every(val => playerPositions.includes(val))) {
-                    displayController.endgame(winningPositions[i]);
                     return true
                 }
             }
@@ -124,22 +129,68 @@ const gameController = (() => {
     }
 })();
 
-const ai = (() => {
+const ai = ((maximizingPlayer, minimizingPlayer) => {
 
-    const bestMove = () => {
-        console.log('best move')
+    const scores = {
+        'X': 10,
+        'O': -10,
+        'draw': 0
     }
 
-    const minimax = (position, depth, isMaximizing) => {
-        if (depth == 0) {
-
+    const winner = (board) => {
+        if (gameController.checkForWin(maximizingPlayer)) {
+            return 'X'
+        } else if (gameController.checkForWin(minimizingPlayer)) {
+            return 'O'
         }
     }
 
-    const evaluate = () => {
-        console.log('evaluate')
+    const bestMove = () => {
+
     }
 
+    const minimax = (board, depth, isMaximizing) => {
+        if ((winner(board) != null) || (depth == 0)) {
+            return scores[winner(board)]
+        }
+        const moves = gameBoard.availableMoves();
+
+        if (maximizingPlayer) {
+            var bestValue = -Infinity;
+            for (let i = 0; i < moves.length; i++) {
+                gameBoard.setOnBoard(i, maximizingPlayer.getSymbol());
+                var val = minimax(gameBoard, depth - 1, false);
+                gameBoard.setOnBoard(i, '');
+                bestvalue = Math.max(bestValue, val)
+            }
+            return bestValue
+        } else {
+            var bestValue = Infinity;
+            for (let i = 0; i < moves.length; i++) {
+                gameBoard.setOnBoard(i, minimizingPlayer.getSymbol());
+                var val = minimax(gameBoard, depth - 1, true);
+                gameBoard.setOnBoard(i, '');
+                bestvalue = Math.max(bestValue, val)
+            }
+            return bestValue
+        }
+    }
+
+    const evaluate = (board) => {
+        if (gameController.checkForWin(maximizingPlayer)) {
+            return 10;
+        } else if (gameController.checkForWin(minimizingPlayer)) {
+            return -10;
+        }
+        return 0
+    }
+
+    return {
+        winner,
+        bestMove,
+        minimax,
+        evaluate
+    }
 
 })();
 
