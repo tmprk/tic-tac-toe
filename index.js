@@ -1,16 +1,18 @@
-const Player = (symbol) => {
-    const _symbol = symbol
+const Player = (symbol, isCPU) => {
+    const _symbol = symbol;
+    const _isCPU = isCPU;
     const getSymbol = () => _symbol;
     return {
+        isCPU: _isCPU,
         getSymbol
     }
 }
 
 const gameBoard = (() => {
-    const _board = Array(9);
+    const _board = Array(9).fill('');
 
     const isValid = (ind) => {
-        return _board[ind] === undefined;
+        return _board[ind] === '';
     }
 
     const setOnBoard = (ind, symbol) => {
@@ -28,22 +30,28 @@ const gameBoard = (() => {
         return indexes
     }
 
+    const availableMoves = () => {
+        const indexes = _board.reduce((a, e, i) => (e === '') ? a.concat(i) : a, [])
+        return indexes
+    }
+
     const clearArray = () => {
-        _board.fill(undefined);
+        _board.fill('');
     }
 
     return {
         isValid,
         setOnBoard,
         getPositions,
-        clearArray
+        clearArray,
+        availableMoves
     }
 })();
 
 const gameController = (() => {
     var _numberOfTurns = 0;
-    const playerOne = Player('X');
-    const playerTwo = Player('O');
+    const playerOne = Player('X', false);
+    const playerTwo = Player('O', false);
 
     const winningPositions = [
         [0, 1, 2],
@@ -114,6 +122,25 @@ const gameController = (() => {
         move,
         checkForWin
     }
+})();
+
+const ai = (() => {
+
+    const bestMove = () => {
+        console.log('best move')
+    }
+
+    const minimax = (position, depth, isMaximizing) => {
+        if (depth == 0) {
+
+        }
+    }
+
+    const evaluate = () => {
+        console.log('evaluate')
+    }
+
+
 })();
 
 const displayController = (() => {
