@@ -1,4 +1,4 @@
-# Tic Tac To
+# Tic Tac Toe
 
 A responsive Tic-Tac-Toe game, part of the Javascript curriculum in Full Stack Javascript.
 
