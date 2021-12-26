@@ -136,14 +136,14 @@ const gameController = (() => {
 
 const ai = (() => {
 
-    const minimax = (current, player) => {
+    const minimax = (current, player, depth = 0) => {
         
         var emptySpots = gameBoard.availableMoves(current);
 
         if (gameController.checkForWin(current, gameController.human())) {
-            return { score: -10 }
+            return { score: -10 + depth }
         } else if (gameController.checkForWin(current, gameController.computer())) {
-            return { score: 10 }
+            return { score: 10 - depth }
         } else if (gameController.checkForDraw(current)) {
             return { score: 0 }
         }
@@ -153,7 +153,7 @@ const ai = (() => {
             var maxValue = -10000;
             for (let i = 0; i < emptySpots.length; i++) {
                 current[emptySpots[i]] = player.getSymbol();
-                var result = minimax(current, gameController.human());
+                var result = minimax(current, gameController.human(), depth + 1);
                 current[emptySpots[i]] = '';
 
                 if (result.score > maxValue) {
@@ -167,7 +167,7 @@ const ai = (() => {
             var minValue = 10000;
             for (let i = 0; i < emptySpots.length; i++) {
                 current[emptySpots[i]] = player.getSymbol();
-                var result = minimax(current, gameController.computer());
+                var result = minimax(current, gameController.computer(), depth + 1);
                 current[emptySpots[i]] = '';
 
                 if (result.score < minValue) {
