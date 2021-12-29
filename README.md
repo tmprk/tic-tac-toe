@@ -1,4 +1,4 @@
-# Tic Tac Toe
+# Tic Tac Toe **(and minimax algorithm)**
 
 A responsive Tic-Tac-Toe game, part of the Javascript curriculum in Full Stack Javascript.
 
@@ -10,6 +10,10 @@ A responsive Tic-Tac-Toe game, part of the Javascript curriculum in Full Stack J
   * In the `gameBoard` object, an array of 9 positions is stored privately, yet this scope is maintained through the public functions of gameBoard.
 * Every time a player makes a turn, their positions are checked against each of the winning positions.
 * When 9 moves are reached without a winner, there is a draw.
+* A minimax algorithm is implemented in its own module. It takes into account depth and will choose the shortest path to victory.
+
+## To-do
+- [ ] Select 1 or 2 player mode. Both work, but it's defaulted to playing with computer because minimax was recentlya added.
 
 ## Screenshots
 Desktop             |  Mobile
